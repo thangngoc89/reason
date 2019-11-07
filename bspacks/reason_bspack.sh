@@ -7,8 +7,8 @@ set -e
 
 THIS_SCRIPT_DIR="$(cd "$( dirname "$0" )" && pwd)"
 
-echo "**This script is switching you to ocaml 4.02.3 for the subsequent bspacking. Please switch back to your own version afterward. Thanks!**\n"
-opam switch 4.02.3
+echo "**This script is switching you to ocaml 4.06.1 for the subsequent bspacking. Please switch back to your own version afterward. Thanks!**\n"
+opam switch 4.06.1
 eval $(opam config env)
 
 # Because OCaml 4.02 doesn't come with the `Result` module, it also needed stubbing out.
@@ -46,7 +46,7 @@ make build -C ../
 # to turn this into a binary, like in
 # https://github.com/BuckleScript/bucklescript/blob/2ad2310f18567aa13030cdf32adb007d297ee717/jscomp/bin/Makefile#L29
 # =============
-../node_modules/bs-platform/bin/bspack.exe \
+./bspack.exe \
   -main-export Refmt_impl \
   -prelude-str "$resultStub" \
   -I "$menhirSuggestedLib" \
@@ -70,7 +70,7 @@ make build -C ../
 # this one is left here as an intermediate file for the subsequent steps. We
 # disregard the usual entry point that is refmt_impl above (which takes care of
 # terminal flags parsing, etc.) and swap it with a new entry point, refmtJsApi (see below)
-../node_modules/bs-platform/bin/bspack.exe \
+./bspack.exe \
   -bs-main Reason_toolchain \
   -prelude-str "$resultStub" \
   -I "$menhirSuggestedLib" \

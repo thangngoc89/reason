@@ -2,7 +2,7 @@ THIS_SCRIPT_DIR="$(cd "$( dirname "$0" )" && pwd)"
 
 echo "**This script is switching you to ocaml 4.02.3 for the subsequent bspacking. Please switch back to your own version afterward. Thanks!**\n"
 # switch to 4.02.3. Bspacking means we're sending the final bundle to BuckleScript, which is still on 4.02
-opam switch 4.02.3
+opam switch 4.06.1
 
 # =============
 # first step, build ocaml-migrate-parsetree
@@ -23,7 +23,7 @@ git clone https://github.com/ocaml-ppx/ocaml-migrate-parsetree.git $TEMP_DIR_FOR
 pushd $TEMP_DIR_FOR_OMP
 
 # pin it at a certain commit
-git checkout 013a39f4c672cbd349bae56d6cf74a64135b92b7
+git checkout 458a7d48cc5d88863a4092e984a8146118796e63
 # if there's any error, check if you have everything installed. You should
 # already from opam pin-ing the reason repo (which depends on ocaml-migrate-parsetree)
 make
@@ -46,11 +46,11 @@ mv $TEMP_DIR_FOR_OMP/* $OMP_ARTIFACTS_DIR
 # =============
 # second step, download google closure compiler
 # =============
-CLOSURE_COMPILER_DIR="$THIS_SCRIPT_DIR/closure-compiler"
+# CLOSURE_COMPILER_DIR="$THIS_SCRIPT_DIR/closure-compiler"
 
-mkdir -p $CLOSURE_COMPILER_DIR
-pushd $CLOSURE_COMPILER_DIR
-curl -O http://dl.google.com/closure-compiler/compiler-20170910.tar.gz
-tar -xzf compiler-20170910.tar.gz
+# mkdir -p $CLOSURE_COMPILER_DIR
+# pushd $CLOSURE_COMPILER_DIR
+# curl -O http://dl.google.com/closure-compiler/compiler-20170910.tar.gz
+# tar -xzf compiler-20170910.tar.gz
 
-popd
+# popd
